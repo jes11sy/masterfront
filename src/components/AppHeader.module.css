@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 0 var(--mantine-spacing-lg);
+  background-color: #112421;
+  border-bottom: 1px solid #1f3b34;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  margin-right: var(--mantine-spacing-md);
+}
+
+.title {
+  font-weight: 700;
+  color: #2fa37b;
+} 
