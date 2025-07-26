@@ -16,6 +16,7 @@ export interface RequestRow {
   result: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapApiToRow = (item: any): RequestRow => ({
   id: item.id,
   rk: item.rk || `РК-${item.id}`,

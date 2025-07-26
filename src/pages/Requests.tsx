@@ -45,7 +45,7 @@ export default function Requests() {
     return requests.filter((row) =>
       Object.values(row).some((value) => value.toString().toLowerCase().includes(search.toLowerCase()))
     );
-  }, [search]);
+  }, [search, requests]);
 
   if (isLoading) return <Center><Loader /></Center>;
   if (isError) return <Center>Ошибка загрузки данных</Center>;
