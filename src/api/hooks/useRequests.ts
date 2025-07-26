@@ -36,7 +36,7 @@ export function useRequests() {
   return useQuery<RequestRow[]>({
     queryKey: ['requests'],
     queryFn: async () => {
-      const { data } = await api.get('/api/requests');
+      const { data } = await api.get('/api/requests/');
       // если backend оборачивает в data
       const list = Array.isArray(data) ? data : data?.data || [];
       return list.map(mapApiToRow);
