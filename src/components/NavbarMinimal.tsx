@@ -11,7 +11,7 @@ import { Stack, Tooltip } from '@mantine/core';
 import classes from './NavbarMinimal.module.css';
 
 interface NavbarLinkProps {
-  icon: React.FC<any>;
+  icon: React.ComponentType<{ size?: number; stroke?: number }>;
   label: string;
   to: string;
 }

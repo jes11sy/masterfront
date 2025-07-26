@@ -63,12 +63,6 @@ const dummyData: RequestRow[] = [
 ];
 
 export default function Requests() {
-  const headerStyle = {
-    position: 'sticky' as const,
-    top: 0,
-    backgroundColor: 'transparent', // Removed theme.colorScheme as per new_code
-    zIndex: 1,
-  };
 
   const columns: DataTableColumn<RequestRow>[] = [
     { accessor: 'id', title: 'ID', width: 60 },
