@@ -39,7 +39,6 @@ export default function Login() {
         window.location.href = '/';
       }
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.error(e);
       form.setErrors({ login: 'Неверный логин или пароль' });
     }
