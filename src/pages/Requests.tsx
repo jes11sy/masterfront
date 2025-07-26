@@ -8,10 +8,14 @@ export default function Requests() {
   const columns: DataTableColumn<RequestRow>[] = [
     { accessor: 'id', title: 'ID', width: 60 },
     { accessor: 'city', title: 'Город' },
-    { accessor: 'type', title: 'Тип' },
+    { accessor: 'type', title: 'Тип заявки' },
     { accessor: 'phone', title: 'Телефон' },
     { accessor: 'name', title: 'Клиент' },
-    { accessor: 'created', title: 'Создано' },
+    { accessor: 'address', title: 'Адрес' },
+    { accessor: 'meeting', title: 'Дата встречи' },
+    { accessor: 'direction', title: 'Направление' },
+    { accessor: 'problem', title: 'Проблема' },
+    { accessor: 'master', title: 'Мастер' },
     {
       accessor: 'status',
       title: 'Статус',
@@ -34,7 +38,7 @@ export default function Requests() {
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 5;
 
-  const { data: requests, isLoading, isError } = useRequests();
+  const { data: requests, isLoading, isError } = useRequests(search);
 
   const filtered = useMemo(() => {
     if (!requests) return [];

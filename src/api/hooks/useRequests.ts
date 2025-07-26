@@ -9,37 +9,37 @@ export interface RequestRow {
   phone: string;
   name: string;
   address: string;
-  date: string;
-  created: string;
+  meeting: string;
   direction: string;
   problem: string;
   status: string;
+  master: string;
   result: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapApiToRow = (item: any): RequestRow => ({
   id: item.id,
-  rk: item.rk || `РК-${item.id}`,
-  city: item.city?.name || item.city || '-',
-  type: item.request_type?.name || item.type || '-',
+  rk: item.advertising_campaign?.name || '-',
+  city: item.city?.name || '-',
+  type: item.request_type?.name || '-',
   phone: item.client_phone || '-',
   name: item.client_name || '-',
   address: item.address || '-',
-  date: item.meeting_date || '-',
-  created: item.created_at ? item.created_at.slice(0, 10) : '-',
-  direction: item.direction || '-',
+  meeting: item.meeting_date || '-',
+  direction: item.direction?.name || '-',
+  master: item.master?.name || 'Не назначен',
   problem: item.problem || '-',
   status: item.status || '-',
   result: item.result || '-',
 });
 
-export function useRequests() {
+export function useRequests(search: string) {
   return useQuery<RequestRow[]>({
-    queryKey: ['requests'],
+    queryKey: ['requests', search],
     queryFn: async () => {
-      const { data } = await api.get('/api/requests/');
-      // если backend оборачивает в data
+      const params = search.trim() ? { params: { search } } : {};
+      const { data } = await api.get('/api/requests/', params);
       const list = Array.isArray(data) ? data : data?.data || [];
       return list.map(mapApiToRow);
     },
