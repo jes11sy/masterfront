@@ -37,7 +37,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
+          # port по умолчанию 22, убрали явную передачу, чтобы избежать port:0 при пустом секрете
           source: "dist/*"
           target: "/var/www/masterfront"
           rm: true  # очистить директорию перед загрузкой
@@ -49,7 +49,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
+          # port по умолчанию 22, убрали явную передачу, чтобы избежать port:0 при пустом секрете
           script: |
             sudo nginx -t
             sudo systemctl reload nginx 
