@@ -38,8 +38,7 @@ export function useRequests(search: string) {
   return useQuery<RequestRow[]>({
     queryKey: ['requests', search],
     queryFn: async () => {
-      const params = search.trim() ? { params: { search } } : {};
-      const { data } = await api.get('/api/requests/', params);
+      const { data } = await api.get('/api/requests/', { params: { search: search ?? '' } });
       const list = Array.isArray(data) ? data : data?.data || [];
       return list.map(mapApiToRow);
     },
