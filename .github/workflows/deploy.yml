@@ -38,8 +38,9 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           # port по умолчанию 22, убрали явную передачу, чтобы избежать port:0 при пустом секрете
-          source: "dist/*"
+          source: "dist/**"
           target: "/var/www/masterfront"
+          strip_components: 1  # убираем верхний каталог dist
           rm: true  # очистить директорию перед загрузкой
 
       # Перезапуск Nginx на сервере
@@ -54,6 +55,11 @@ jobs:
             set -e
             # 1. Каталог фронта
             sudo mkdir -p /var/www/masterfront
+            # если после старых деплоев осталась вложенная папка dist – перемещаем содержимое
+            if [ -d /var/www/masterfront/dist ]; then
+              sudo mv /var/www/masterfront/dist/* /var/www/masterfront/
+              sudo rm -rf /var/www/masterfront/dist
+            fi
             # 2. Удаляем дефолтный сайт и убеждаемся, что наш конфиг подключён (конфиг создавали вручную)
             sudo ln -sf /etc/nginx/sites-available/masterfront /etc/nginx/sites-enabled/masterfront || true
             sudo rm -f /etc/nginx/sites-enabled/default || true
