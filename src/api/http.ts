@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAuthToken } from '../store/auth';
 
 /**
  * Базовый клиент API.
@@ -13,6 +14,13 @@ const baseURL = raw.replace(/^http:/, 'https:');
 const api = axios.create({
   baseURL,
   withCredentials: true,
+});
+
+// добавляем Bearer токен, если есть
+api.interceptors.request.use((config) => {
+  const token = getAuthToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
 
 export default api; 

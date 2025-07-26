@@ -12,6 +12,8 @@ import {
 import { useForm } from '@mantine/form';
 // import logoImg from '../assets/logo.png';
 import { IconUser, IconLock, IconEye, IconEyeOff } from '@tabler/icons-react';
+import api from '../api/http';
+import { useAuthStore } from '../store/auth';
 
 export default function Login() {
   const form = useForm({
@@ -25,9 +27,22 @@ export default function Login() {
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    console.log('Login', values);
-    // Здесь будет запрос на API и редирект
+  const handleSubmit = async (values: typeof form.values) => {
+    try {
+      const { data } = await api.post('/api/auth/login', {
+        login: values.login,
+        password: values.password,
+      });
+
+      if (data.access_token) {
+        useAuthStore.getState().setToken(data.access_token);
+        window.location.href = '/';
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+      form.setErrors({ login: 'Неверный логин или пароль' });
+    }
   };
 
   return (
