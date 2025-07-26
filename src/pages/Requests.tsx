@@ -7,14 +7,11 @@ export default function Requests() {
 
   const columns: DataTableColumn<RequestRow>[] = [
     { accessor: 'id', title: 'ID', width: 60 },
-    { accessor: 'rk', title: 'РК' },
     { accessor: 'city', title: 'Город' },
-    { accessor: 'type', title: 'Тип заявки' },
+    { accessor: 'type', title: 'Тип' },
+    { accessor: 'phone', title: 'Телефон' },
     { accessor: 'name', title: 'Клиент' },
-    { accessor: 'address', title: 'Адрес' },
-    { accessor: 'date', title: 'Дата встречи' },
-    { accessor: 'direction', title: 'Направление' },
-    { accessor: 'problem', title: 'Проблема' },
+    { accessor: 'created', title: 'Создано' },
     {
       accessor: 'status',
       title: 'Статус',

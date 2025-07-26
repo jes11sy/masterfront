@@ -10,6 +10,7 @@ export interface RequestRow {
   name: string;
   address: string;
   date: string;
+  created: string;
   direction: string;
   problem: string;
   status: string;
@@ -25,7 +26,8 @@ const mapApiToRow = (item: any): RequestRow => ({
   phone: item.client_phone || '-',
   name: item.client_name || '-',
   address: item.address || '-',
-  date: item.date || '-',
+  date: item.meeting_date || '-',
+  created: item.created_at ? item.created_at.slice(0, 10) : '-',
   direction: item.direction || '-',
   problem: item.problem || '-',
   status: item.status || '-',
